@@ -1,0 +1,4 @@
+# array-search
+
+### Usage
+``` js

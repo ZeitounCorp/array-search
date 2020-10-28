@@ -1,0 +1,24 @@
+{
+  "name": "array-search",
+  "version": "1.0.0",
+  "description": "Research to expand Array methods with a .search() option",
+  "main": "search.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZeitounCorp/array-search.git"
+  },
+  "keywords": [
+    "js",
+    "array",
+    "prototype"
+  ],
+  "author": "Lenny Zeitoun <lenny@zeitouncorporate.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZeitounCorp/array-search/issues"
+  },
+  "homepage": "https://github.com/ZeitounCorp/array-search#readme"
+}
