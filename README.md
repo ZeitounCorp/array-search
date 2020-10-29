@@ -7,4 +7,5 @@ You are more than welcome to contribute
 ### Usage
 ``` js
 let myArray = new SearchableArray([1, 2, 3]);
+// At the moment, for examples, you can look into the tests folder
 ``` 
