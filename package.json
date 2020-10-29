@@ -1,10 +1,14 @@
 {
-  "name": "array-search",
+  "name": "searchable-array",
   "version": "1.0.0",
-  "description": "Research to expand Array methods with a .search() option",
-  "main": "search.js",
+  "description": "research to expand | improve array",
+  "mains": {
+    "server": "./server/array_server.js",
+    "client": "./client/array_client.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "cd server && node test_server.js",
+    "client": "cd client && node test_client.js"
   },
   "repository": {
     "type": "git",
