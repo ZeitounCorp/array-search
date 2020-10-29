@@ -31,7 +31,7 @@ function SearchableArray(arr, stts) {
  */
 
 SearchableArray.prototype.content_type = function (arr) {
-  let curr_arr = arr || this.arr;
+  let curr_arr = arr && Array.isArray(arr) ? arr : this.arr;
   let type = this.stts.content_type || '';
   // All possible typeof returns
   const possible_types = ['number', 'string', 'function', 'boolean', 'bigint', 'symbol', 'object', 'undefined'];
@@ -92,6 +92,43 @@ SearchableArray.prototype.get_content_at_index = function (index, value_only = t
     case 'NaN':
       throw_err('The parameter\'s you provided isn\'t of type Array nor Number');
   }
+}
+
+/**
+* Split Arrays' content in subsets arrays named after their content's type. !--work only on arrays whos content's type is 'mixed'--!
+*
+* @return {Object} - return an object made of arrays, their key is based on their content type (egc: number || object || function || string)
+*/
+
+SearchableArray.prototype.split_mixed_content = function () {
+
+  if (this.stts.content_type !== 'mixed') {
+    update_history('Request to split mixed array content: fail', this);
+    throw_err('This function cannot be applied on an array whose content is not of type mixed');
+  }
+
+  const keys = [];
+  const returnable = {};
+
+  for (let i = 0; i < this.arr.length; i++) {
+    const type_of_el = typeof this.arr[i];
+    if (keys.includes(type_of_el)) {
+      returnable[type_of_el].push(this.arr[i]);
+    } else {
+      keys.push(type_of_el);
+      Object.defineProperty(returnable, type_of_el, {
+        value: [],
+        enumerable: true,
+        writable: false
+      });
+      returnable[type_of_el].push(this.arr[i]);
+    }
+  }
+
+  update_history('Request to split mixed array content: success', this);
+
+  return returnable;
+
 }
 
 /**

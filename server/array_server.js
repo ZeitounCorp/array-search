@@ -62,9 +62,9 @@ SearchableArray.prototype.content_type = function (arr) {
  * @return {(Object|Array|Number|String)} - item at array[index] or an array of the items found 
  */
 
- SearchableArray.prototype.get_content_at_index = function (index, value_only = true) {
+SearchableArray.prototype.get_content_at_index = function (index, value_only = true) {
 
-  if(!index) {
+  if (!index) {
     throw_err('You didn\'t provide an index nor an array of indexes');
   } else if (value_only && typeof value_only !== 'boolean') {
     throw_err('value_only must be of type boolean');
@@ -72,18 +72,18 @@ SearchableArray.prototype.content_type = function (arr) {
 
   const type_of_index = Array.isArray(index) ? 'array' : typeof index === 'number' ? 'number' : 'NaN';
 
-  if(type_of_index !== 'NaN') {
+  if (type_of_index !== 'NaN') {
     RegisterChangesIO.emit('action_occured', this, 'Request content at index: success');
   } else {
     RegisterChangesIO.emit('action_occured', this, 'Request content at index: fail');
   }
-  
+
   switch (type_of_index) {
     case 'number':
-      if(index >= this.arr.length) {
+      if (index >= this.arr.length) {
         throw_err('The index you provided is out of boundaries');
       }
-      return value_only ? this.arr[index] : { value: this.arr[index], type: typeof this.arr[index]}
+      return value_only ? this.arr[index] : { value: this.arr[index], type: typeof this.arr[index] }
     case 'array':
       if (index.some((i) => i >= this.arr.length)) {
         throw_err('One or more indexes provided are out of boundaries');
@@ -94,7 +94,44 @@ SearchableArray.prototype.content_type = function (arr) {
     case 'NaN':
       throw_err('The parameter\'s you provided isn\'t of type Array nor Number');
   }
- }
+}
+
+/**
+* Split Arrays' content in subsets arrays named after their content's type. !--work only on arrays whos content's type is 'mixed'--!
+*
+* @return {Object} - return an object made of arrays, their key is based on their content type (egc: number || object || function || string)
+*/
+
+SearchableArray.prototype.split_mixed_content = function() {
+
+  if (this.stts.content_type !== 'mixed') {
+    RegisterChangesIO.emit('action_occured', this, 'Request to split mixed array content: fail');
+    throw_err('This function cannot be applied on an array whose content is not of type mixed');
+  }
+
+  const keys = [];
+  const returnable = {};
+
+  for (let i = 0; i < this.arr.length; i++) {
+    const type_of_el = typeof this.arr[i];
+    if(keys.includes(type_of_el)) {
+      returnable[type_of_el].push(this.arr[i]);
+    } else {
+      keys.push(type_of_el);
+      Object.defineProperty(returnable, type_of_el, {
+        value: [],
+        enumerable: true,
+        writable: false
+      });
+      returnable[type_of_el].push(this.arr[i]);
+    }
+  }
+
+  RegisterChangesIO.emit('action_occured', this, 'Request to split mixed array content: success');
+
+  return returnable;
+
+}
 
 /**
   * Handle errors.
