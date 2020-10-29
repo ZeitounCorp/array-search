@@ -1,6 +1,6 @@
 {
   "name": "searchable-array",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "research to expand | improve array",
   "mains": {
     "server": "./server/array_server.js",
