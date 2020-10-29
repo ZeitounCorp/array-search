@@ -2,7 +2,7 @@ const EventEmitter = require('events');
 
 const RegisterChangesIO = new EventEmitter();
 
-RegisterChangesIO.on('action_occured', (it, act) => {
+RegisterChangesIO.on('action_occured_array', (it, act) => {
   it.actions_history.push({ act, timestamp: Date.now()});
 });
 

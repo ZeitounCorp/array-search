@@ -1,4 +1,4 @@
-const RegisterChangesIO = require('../../utils/events');
+const RegisterChangesIO = require('../../Utils/events');
 
 /**
  *  SearchableArray constructor
@@ -50,7 +50,7 @@ SearchableArray.prototype.content_type = function (arr) {
   type = type === '' ? 'mixed' : type;
   this.stts.content_type = type;
 
-  RegisterChangesIO.emit('action_occured', this, 'Request array\'s content type');
+  RegisterChangesIO.emit('action_occured_array', this, 'Request array\'s content type');
 
   return type
 }
@@ -77,9 +77,9 @@ SearchableArray.prototype.get_content_at_index = function (index, value_only = t
   const type_of_index = Array.isArray(index) ? 'array' : typeof index === 'number' ? 'number' : 'NaN';
 
   if (type_of_index !== 'NaN') {
-    RegisterChangesIO.emit('action_occured', this, 'Request content at index: success');
+    RegisterChangesIO.emit('action_occured_array', this, 'Request content at index: success');
   } else {
-    RegisterChangesIO.emit('action_occured', this, 'Request content at index: fail');
+    RegisterChangesIO.emit('action_occured_array', this, 'Request content at index: fail');
   }
 
   switch (type_of_index) {
@@ -110,10 +110,10 @@ SearchableArray.prototype.get_content_at_index = function (index, value_only = t
 SearchableArray.prototype.split_mixed_content = function() {
 
   if (this.stts.content_type !== 'mixed') {
-    RegisterChangesIO.emit('action_occured', this, 'Request to split mixed array content: fail');
+    RegisterChangesIO.emit('action_occured_array', this, 'Request to split mixed array content: fail');
     throw_err('This function cannot be applied on an array whose content is not of type mixed');
   } else if (this.stts.two_d === true) {
-    RegisterChangesIO.emit('action_occured', this, 'Request to split mixed array content: fail');
+    RegisterChangesIO.emit('action_occured_array', this, 'Request to split mixed array content: fail');
     throw_err('This method is only applicable to one dimensional array');
   }
 
@@ -135,7 +135,7 @@ SearchableArray.prototype.split_mixed_content = function() {
     }
   }
 
-  RegisterChangesIO.emit('action_occured', this, 'Request to split mixed array content: success');
+  RegisterChangesIO.emit('action_occured_array', this, 'Request to split mixed array content: success');
 
   return returnable;
 
