@@ -1,14 +1,22 @@
 {
-  "name": "searchable-array",
+  "name": "extend-data-structures.js",
   "version": "0.0.1",
-  "description": "research to expand | improve array",
+  "description": "research to expand | improve arrays, objects",
   "mains": {
-    "server": "./server/array_server.js",
-    "client": "./client/array_client.js"
+    "Array": {
+      "server": "./libs/Array/server/array_server.js",
+      "client": "./libs/Array/client/array_client.js"
+    }, 
+    "Object": {
+      "server": "./libs/Object/server/object_server.js",
+      "client": "./libs/Object/client/object_client.js"
+    }
   },
   "scripts": {
-    "server": "cd server && node test_server.js",
-    "client": "cd client && node test_client.js"
+    "server-arr": "cd tests/Array/npm-server && node test_server.js",
+    "client-arr": "cd tests/Array/npm-client && node test_client.js",
+    "server-obj": "cd tests/Object/npm-server && node test_server.js",
+    "client-obj": "cd tests/Object/npm-client && node test_client.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +25,7 @@
   "keywords": [
     "js",
     "array",
+    "object",
     "prototype"
   ],
   "author": "Lenny Zeitoun <lenny@zeitouncorporate.com>",

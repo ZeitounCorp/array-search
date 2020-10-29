@@ -1,4 +1,4 @@
-let SearchableArray = require('./array_client');
+let SearchableArray = require('../../../libs/Array/client/array_client');
 
 let arr = new SearchableArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'B']);
 

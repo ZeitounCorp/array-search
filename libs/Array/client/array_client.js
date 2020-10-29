@@ -20,6 +20,7 @@ function SearchableArray(arr, stts) {
 
   if (!stts || typeof stts !== 'object') {
     this.content_type(arr);
+    isTwoDee(this.arr, this);
   }
 }
 
@@ -57,6 +58,7 @@ SearchableArray.prototype.content_type = function (arr) {
  *
  * @param {(Number|Array)}  index
  * @param {Boolean}  [value_only] - set it to false if you want a detailed array of value returned
+ * @throws {Error} - if the array has more than one dimension
  * @return {(Object|Array|Number|String)} - item at array[index] or an array of the items found 
  */
 
@@ -66,6 +68,8 @@ SearchableArray.prototype.get_content_at_index = function (index, value_only = t
     throw_err('You didn\'t provide an index nor an array of indexes');
   } else if (value_only && typeof value_only !== 'boolean') {
     throw_err('value_only must be of type boolean');
+  } else if (this.stts.two_d === true) {
+    throw_err('This method is only applicable to one dimensional array');
   }
 
   const type_of_index = Array.isArray(index) ? 'array' : typeof index === 'number' ? 'number' : 'NaN';
@@ -95,8 +99,9 @@ SearchableArray.prototype.get_content_at_index = function (index, value_only = t
 }
 
 /**
-* Split Arrays' content in subsets arrays named after their content's type. !--work only on arrays whos content's type is 'mixed'--!
+* Split Arrays' content in subsets arrays named after their content's type.
 *
+* @throws {Error} - if the array has more than one dimension or if array's content type is not 'mixed'
 * @return {Object} - return an object made of arrays, their key is based on their content type (egc: number || object || function || string)
 */
 
@@ -105,6 +110,9 @@ SearchableArray.prototype.split_mixed_content = function () {
   if (this.stts.content_type !== 'mixed') {
     update_history('Request to split mixed array content: fail', this);
     throw_err('This function cannot be applied on an array whose content is not of type mixed');
+  } else if (this.stts.two_d === true) {
+    update_history('Request to split mixed array content: fail', this);
+    throw_err('This method is only applicable to one dimensional array');
   }
 
   const keys = [];
@@ -139,6 +147,21 @@ SearchableArray.prototype.split_mixed_content = function () {
 
 function throw_err(err) {
   throw new Error(err);
+}
+
+/**
+  * Check if this.arr is a two dimensional array
+  *
+  * @param {Array} arr
+  * @param {SearchableArray} it
+  */
+
+function isTwoDee(arr, it) {
+  if (arr.every((el) => Array.isArray(el))) {
+    it.stts.two_d = true;
+  } else {
+    it.stts.two_d = false;
+  }
 }
 
 /**
