@@ -14,6 +14,7 @@ let myArray = new SearchableArray([1, 2, 3]);
 - [ ] Add a sort of 'wayback machine' for array while `ENV === __DEV__`, it could let developers go back to a previous version of the array egc: goBackTo(Array['v1']) ❗ 
 - [ ] Add a possibility to find an item in an array from a set of chars without needing regex for the client. egc: find word who has 2 letters a and a letter b => .findWord('aab') || .findWord('2a-b') ❕ 
 - [ ] Add a .forEach method on Object ❗❗
+- [x] Add a method to transform a 2D Array into an Object (key example: i1j0: 'foo')
 - [x] Add a method to split an array with mixed content into multiple (one content type only per array) arrays 
 ##### Order of priority
 - ❗❗ ➡️ Urgent

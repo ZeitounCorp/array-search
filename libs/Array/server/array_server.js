@@ -107,7 +107,7 @@ SearchableArray.prototype.get_content_at_index = function (index, value_only = t
 * @return {Object} - return an object made of arrays, their key is based on their content type (egc: number || object || function || string)
 */
 
-SearchableArray.prototype.split_mixed_content = function() {
+SearchableArray.prototype.split_mixed_content = function () {
 
   if (this.stts.content_type !== 'mixed') {
     RegisterChangesIO.emit('action_occured_array', this, 'Request to split mixed array content: fail');
@@ -122,7 +122,7 @@ SearchableArray.prototype.split_mixed_content = function() {
 
   for (let i = 0; i < this.arr.length; i++) {
     const type_of_el = typeof this.arr[i];
-    if(keys.includes(type_of_el)) {
+    if (keys.includes(type_of_el)) {
       returnable[type_of_el].push(this.arr[i]);
     } else {
       keys.push(type_of_el);
@@ -142,6 +142,38 @@ SearchableArray.prototype.split_mixed_content = function() {
 }
 
 /**
+* Create an object out of a twoD Array
+*
+* @throws {Error} - if the array has less than two dimensions
+* @return {Object} - return an object, each key is based on the content indexes (egc: array[0][1] will be i0j1)
+*/
+
+SearchableArray.prototype.twodee_object = function () {
+
+  if (this.stts.two_d === false) {
+    RegisterChangesIO.emit('action_occured_array', this, 'Request to transform two d array to object: fail');
+    throw_err('This method is only applicable to array with more than one dimension');
+  }
+
+  const returnable = {};
+
+  for (let i = 0; i < this.arr.length; i++) {
+    for (let j = 0; j < this.arr[i].length; j++) {
+      Object.defineProperty(returnable, `i${i}j${j}`, {
+        value: this.arr[i][j],
+        enumerable: true,
+        writable: false
+      });
+    }
+  }
+
+  RegisterChangesIO.emit('action_occured_array', this, 'Request to transform two d array to object: success');
+
+  return returnable;
+
+}
+
+/**
   * Check if this.arr is a two dimensional array
   *
   * @param {Array} arr
@@ -149,7 +181,7 @@ SearchableArray.prototype.split_mixed_content = function() {
   */
 
 function isTwoDee(arr, it) {
-  if(arr.every((el) => Array.isArray(el))) {
+  if (arr.every((el) => Array.isArray(el))) {
     it.stts.two_d = true;
   } else {
     it.stts.two_d = false;

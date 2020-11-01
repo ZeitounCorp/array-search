@@ -140,6 +140,38 @@ SearchableArray.prototype.split_mixed_content = function () {
 }
 
 /**
+* Create an object out of a twoD Array
+*
+* @throws {Error} - if the array has less than two dimensions
+* @return {Object} - return an object, each key is based on the content indexes (egc: array[0][1] will be i0j1)
+*/
+
+SearchableArray.prototype.twodee_object = function () {
+
+  if (this.stts.two_d === false) {
+    update_history('Request to transform two d array to object: fail', this);
+    throw_err('This method is only applicable to array with more than one dimension');
+  }
+
+  const returnable = {};
+
+  for (let i = 0; i < this.arr.length; i++) {
+    for (let j = 0; j < this.arr[i].length; j++) {
+      Object.defineProperty(returnable, `i${i}j${j}`, {
+        value: this.arr[i][j],
+        enumerable: true,
+        writable: false
+      });
+    }
+  }
+
+  update_history('Request to transform two d array to object: success', this);
+
+  return returnable;
+
+}
+
+/**
   * Handle errors.
   *
   * @param {String} err
