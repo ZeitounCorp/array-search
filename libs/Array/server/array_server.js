@@ -10,7 +10,7 @@ const RegisterChangesIO = require('../../Utils/events');
  */
 
 function SearchableArray(arr, stts) {
-  this.stts = typeof stts === 'object' ? stts : {
+  this.stts = typeof stts === 'object' && Array.isArray(stts) === false ? stts : {
     content_type: '',
     length: arr.length,
     ordered: false,
