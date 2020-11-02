@@ -6,7 +6,7 @@
     "Array": {
       "server": "./libs/Array/server/array_server.js",
       "client": "./libs/Array/client/array_client.js"
-    }, 
+    },
     "Object": {
       "server": "./libs/Object/server/object_server.js",
       "client": "./libs/Object/client/object_client.js"
@@ -16,7 +16,8 @@
     "server-arr": "cd tests/Array/npm-server && node test_server.js",
     "client-arr": "cd tests/Array/npm-client && node test_client.js",
     "server-obj": "cd tests/Object/npm-server && node test_server.js",
-    "client-obj": "cd tests/Object/npm-client && node test_client.js"
+    "client-obj": "cd tests/Object/npm-client && node test_client.js",
+    "bundlesize": "bundlesize --config ./configs/bundlesize.config.json "
   },
   "repository": {
     "type": "git",
@@ -33,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/ZeitounCorp/array-search/issues"
   },
-  "homepage": "https://github.com/ZeitounCorp/array-search#readme"
+  "homepage": "https://github.com/ZeitounCorp/array-search#readme",
+  "devDependencies": {
+    "bundlesize": "^0.18.0"
+  }
 }

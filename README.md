@@ -28,3 +28,16 @@ let myArray = new SearchableArray([1, 2, 3]);
 3. ⤴️ Make a pull request 
 4. If ```code``` is ✅ then 🤓 Enjoy 🤓 seeing your code merged 
     - Else if 🛑 then take a good cup of ☕️ and __try again__ or __contact me__, so we can fix it __together__ 😄
+
+### Bundlesize
+```console
+foo@bar: ArraySearch $ npm run bundlesize
+
+  PASS  ./libs/Array/client/array_client.js: 6.16KB < maxSize 10KB (no compression) 
+
+  PASS  ./libs/Array/server/array_server.js: 6.19KB < maxSize 10KB (no compression) 
+
+  PASS  ./libs/Object/client/object_client.js: 0B < maxSize 10KB (no compression) 
+
+  PASS  ./libs/Object/server/object_server.js: 0B < maxSize 10KB (no compression) 
+ ```

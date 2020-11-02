@@ -1,0 +1,24 @@
+{
+  "files": [
+    {
+      "path": "./libs/Array/client/array_client.js",
+      "maxSize": "10 kB",
+      "compression": "none"
+    },
+    {
+      "path": "./libs/Array/server/array_server.js",
+      "maxSize": "10 kB",
+      "compression": "none"
+    },
+    {
+      "path": "./libs/Object/client/object_client.js",
+      "maxSize": "10 kB",
+      "compression": "none"
+    },
+    {
+      "path": "./libs/Object/server/object_server.js",
+      "maxSize": "10 kB",
+      "compression": "none"
+    }
+  ]
+}
