@@ -1,4 +1,4 @@
-const RegisterChangesIO = require('../../Utils/events');
+const RegisterChangesIO = require('../../../Utils/events');
 
 /**
  *  SearchableArray constructor

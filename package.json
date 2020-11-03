@@ -4,12 +4,12 @@
   "description": "research to expand | improve arrays, objects",
   "mains": {
     "Array": {
-      "server": "./libs/Array/server/array_server.js",
-      "client": "./libs/Array/client/array_client.js"
+      "server": "./libs/Array/server/",
+      "client": "./libs/Array/client/"
     },
     "Object": {
-      "server": "./libs/Object/server/object_server.js",
-      "client": "./libs/Object/client/object_client.js"
+      "server": "./libs/Object/server/",
+      "client": "./libs/Object/client/"
     }
   },
   "scripts": {
@@ -17,11 +17,12 @@
     "client-arr": "cd tests/Array/npm-client && node test_client.js",
     "server-obj": "cd tests/Object/npm-server && node test_server.js",
     "client-obj": "cd tests/Object/npm-client && node test_client.js",
-    "bundlesize": "bundlesize --config ./configs/bundlesize.config.json "
+    "bundlesize": "bundlesize --config ./configs/bundlesize.config.json ",
+    "comp-sc": "cd ./bin && node compare.js ../libs/Array/server/include/array_server.js ../libs/Array/client/include/array_client.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ZeitounCorp/array-search.git"
+    "url": "git+https://github.com/ZeitounCorp/extend-data-structures.js.git"
   },
   "keywords": [
     "js",
@@ -32,10 +33,11 @@
   "author": "Lenny Zeitoun <lenny@zeitouncorporate.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ZeitounCorp/array-search/issues"
+    "url": "https://github.com/ZeitounCorp/extend-data-structures.js/issues"
   },
-  "homepage": "https://github.com/ZeitounCorp/array-search#readme",
+  "homepage": "https://github.com/ZeitounCorp/extend-data-structures.js#readme",
   "devDependencies": {
-    "bundlesize": "^0.18.0"
+    "bundlesize": "^0.18.0",
+    "standard-version": "^9.0.0"
   }
 }

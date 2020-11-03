@@ -1,4 +1,4 @@
-let SearchableArray = require('../../../libs/Array/server/array_server');
+let SearchableArray = require('../../../libs/Array/server/');
 
 let arr = new SearchableArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'A']);
 let arr2d = new SearchableArray([[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'A'], [1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 'A', 'B']]);
